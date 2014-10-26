@@ -105,8 +105,8 @@
                         <Grid ClipToBounds="True">
 
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="100*" />
-                                <RowDefinition Height="100*" />
+                                <RowDefinition Height="100*"/>
+                                <RowDefinition Height="100*"/>
                             </Grid.RowDefinitions>
 
                             <!-- Main panel -->

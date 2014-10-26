@@ -1,0 +1,163 @@
+﻿<Application x:Class="GameOfLife.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:GameOfLife"
+             StartupUri="MainWindow.xaml">
+    
+    <Application.Resources>
+
+        <!-- Background Pink -->
+        <LinearGradientBrush x:Key="BackgroundPink" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FFFF2691" Offset="0.996"/>
+            <GradientStop Color="HotPink"/>
+        </LinearGradientBrush>
+
+        <!-- Dead Cell Grey -->
+        <SolidColorBrush x:Key="DeadCell" Color="#FF5C737F"/>
+
+        <!-- Glossy Sheen -->
+        <LinearGradientBrush x:Key="GlossySheen" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#19FFFFFF" Offset="1"/>
+            <GradientStop/>
+        </LinearGradientBrush>
+
+        <!-- Mouse Over Orange -->
+        <LinearGradientBrush x:Key="MouseOverOrange" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#99FF4500" Offset="1"/>
+            <GradientStop Color="#00FF4500"/>
+        </LinearGradientBrush>
+
+        <!-- Toggle button style -->
+        <Style x:Key="togCellStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid ClipToBounds="True">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100*" />
+                                <RowDefinition Height="100*" />
+                            </Grid.RowDefinitions>
+
+                            <!-- Main panel -->
+                            <Rectangle x:Name="outerRectangle"
+                                       Grid.RowSpan="2"
+                                       HorizontalAlignment="Stretch"  
+                                       VerticalAlignment="Stretch" 
+                                       StrokeThickness="0" 
+                                       RadiusX="5" RadiusY="5" 
+                                       Fill="{StaticResource BackgroundPink}" />
+
+                            <!-- Glossy shine -->
+                            <Rectangle x:Name="innerRectangle"  
+                                       HorizontalAlignment="Stretch"  
+                                       VerticalAlignment="Stretch"
+                                       StrokeThickness="0"
+                                       RadiusX="5" RadiusY="5"   
+                                       Fill="{StaticResource GlossySheen}"/>
+
+                            <!-- Mouse over panel -->
+                            <Rectangle x:Name="mouseOverRectangle"
+                                       Grid.RowSpan="2"
+                                       HorizontalAlignment="Stretch"  
+                                       VerticalAlignment="Stretch" 
+                                       StrokeThickness="0"
+                                       RadiusX="5" RadiusY="5" />
+
+                            <!-- Text box -->
+                            <DockPanel Name="myContentPresenterDockPanel" Grid.RowSpan="2">
+                                <ContentPresenter x:Name="myContentPresenter" 
+                                                  Content="{TemplateBinding  Content}" 
+                                                  VerticalAlignment="Center"
+                                                  TextBlock.TextAlignment="Center"
+                                                  TextBlock.Foreground="{TemplateBinding Foreground}"/>
+                            </DockPanel>
+                        </Grid>
+
+                        <!-- Triggers -->
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="outerRectangle" 
+                                        Property="Fill" 
+                                        Value="{StaticResource DeadCell}"/>
+                            </Trigger>
+
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="mouseOverRectangle" 
+                                        Property="Fill" 
+                                        Value="{StaticResource MouseOverOrange}"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Button style -->
+        <Style x:Key="buttonCellStyle" TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="20" />
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid ClipToBounds="True">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100*" />
+                                <RowDefinition Height="100*" />
+                            </Grid.RowDefinitions>
+
+                            <!-- Main panel -->
+                            <Rectangle x:Name="outerRectangle"
+                                       Grid.RowSpan="2"
+                                       HorizontalAlignment="Stretch"  
+                                       VerticalAlignment="Stretch" 
+                                       StrokeThickness="0" 
+                                       RadiusX="5" RadiusY="5" 
+                                       Fill="{StaticResource BackgroundPink}" />
+
+                            <!-- Glossy shine -->
+                            <Rectangle x:Name="innerRectangle"  
+                                       HorizontalAlignment="Stretch"  
+                                       VerticalAlignment="Stretch"
+                                       StrokeThickness="0"
+                                       RadiusX="5" RadiusY="5"   
+                                       Fill="{StaticResource GlossySheen}"/>
+
+                            <!-- Mouse over panel -->
+                            <Rectangle x:Name="mouseOverRectangle"
+                                       Grid.RowSpan="2"
+                                       HorizontalAlignment="Stretch"  
+                                       VerticalAlignment="Stretch" 
+                                       StrokeThickness="0"
+                                       RadiusX="5" RadiusY="5" />
+
+                            <!-- Text box -->
+                            <DockPanel Name="myContentPresenterDockPanel" Grid.RowSpan="2">
+                                <ContentPresenter x:Name="myContentPresenter" 
+                                                  Content="{TemplateBinding  Content}" 
+                                                  VerticalAlignment="Center"
+                                                  TextBlock.TextAlignment="Center"
+                                                  TextBlock.Foreground="{TemplateBinding Foreground}"/>
+                            </DockPanel>
+                        </Grid>
+
+                        <!-- Triggers -->
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="mouseOverRectangle" 
+                                        Property="Fill" 
+                                        Value="{StaticResource MouseOverOrange}"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Application.Resources>
+</Application>
